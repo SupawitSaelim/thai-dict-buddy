@@ -39,10 +39,10 @@ const ListTab = ({
         <table className="w-full">
           <thead className={darkMode ? 'bg-gray-700' : 'bg-gray-50'}>
             <tr>
-              <th className="px-6 py-4 text-left">คำศัพท์</th>
-              <th className="px-6 py-4 text-left">คำแปล</th>
-              <th className="px-6 py-4 text-left">หมวดหมู่</th>
-              <th className="px-6 py-4 text-right">จัดการ</th>
+              <th className="px-6 py-4 text-center">คำศัพท์</th>
+              <th className="px-6 py-4 text-center">คำแปล</th>
+              <th className="px-6 py-4 text-center">หมวดหมู่</th>
+              <th className="px-6 py-4 text-right"></th>
             </tr>
           </thead>
           <tbody>
