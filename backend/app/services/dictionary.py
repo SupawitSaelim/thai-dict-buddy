@@ -227,3 +227,8 @@ class DictionaryService:
         self._save_dictionary()
         
         return words
+
+    def delete_all_words(self):
+        """Delete all words from the dictionary."""
+        self.words.clear()
+        self._save_dictionary()  

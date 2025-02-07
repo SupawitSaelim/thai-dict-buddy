@@ -77,3 +77,12 @@ async def sort_words(
         return sorted_words
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
+
+@router.delete("/words/", response_model=Dict[str, str])
+async def delete_all_words(dictionary: DictionaryService = Depends(get_dictionary_service)):
+    """Delete all words from the dictionary."""
+    try:
+        dictionary.delete_all_words()  # ต้องเพิ่มเมธอดนี้ใน DictionaryService
+        return {"message": "ลบคำศัพท์ทั้งหมดเรียบร้อยแล้ว"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

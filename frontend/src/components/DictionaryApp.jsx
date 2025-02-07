@@ -1,9 +1,9 @@
-// DictionaryApp.jsx
 import React, { useState, useEffect } from 'react';
-import { Search, Plus, Book, Moon, Sun, AlertCircle } from 'lucide-react';
+import { Search, Plus, Book, Moon, Sun, AlertCircle, GraduationCap } from 'lucide-react';
 import SearchTab from './SearchTab';
 import AddEditTab from './AddEditTab';
 import ListTab from './ListTab';
+import PracticeTab from './PracticeTab';
 
 const DictionaryApp = () => {
   const [words, setWords] = useState([]);
@@ -144,7 +144,6 @@ const DictionaryApp = () => {
         setActiveTab('list');
       } else {
         if (response.status === 409) {
-          // Handle duplicate word error
           showMessage('error', data.detail);
         } else {
           showMessage('error', data.detail || 'เกิดข้อผิดพลาด');
@@ -181,7 +180,8 @@ const DictionaryApp = () => {
           {[
             { id: 'search', label: 'ค้นหาคำศัพท์', icon: Search },
             { id: 'add', label: editingWord ? 'แก้ไขคำศัพท์' : 'เพิ่มคำศัพท์', icon: Plus },
-            { id: 'list', label: 'รายการคำศัพท์', icon: Book }
+            { id: 'list', label: 'รายการคำศัพท์', icon: Book },
+            { id: 'practice', label: 'ฝึกคำศัพท์', icon: GraduationCap }
           ].map(({ id, label, icon: Icon }) => (
             <button
               key={id}
@@ -236,6 +236,17 @@ const DictionaryApp = () => {
               handleEdit={handleEdit}
               handleDelete={handleDelete}
               onSort={handleSort}
+              showMessage={showMessage}
+              setActiveTab={setActiveTab}
+              setWords={setWords}
+              fetchWords={fetchWords}
+            />
+          )}
+
+          {activeTab === 'practice' && (
+            <PracticeTab
+              darkMode={darkMode}
+              words={words}
             />
           )}
         </div>
