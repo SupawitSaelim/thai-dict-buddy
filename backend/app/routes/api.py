@@ -15,6 +15,8 @@ async def add_word(word: Word, dictionary: DictionaryService = Depends(get_dicti
     try:
         dictionary.add_word(word)
         return {"message": f"เพิ่มคำว่า '{word.english}' เรียบร้อยแล้ว"}
+    except ValueError as e:
+        raise HTTPException(status_code=409, detail=str(e))
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 
@@ -63,3 +65,15 @@ async def delete_word(english_word: str, dictionary: DictionaryService = Depends
 async def get_words_by_category(category: str, dictionary: DictionaryService = Depends(get_dictionary_service)):
     """Get all words in a specific category."""
     return dictionary.get_words_by_category(category)
+
+@router.post("/words/sort/", response_model=List[Word])
+async def sort_words(
+    sort_by: str,
+    dictionary: DictionaryService = Depends(get_dictionary_service)
+):
+    """Sort all words by specified field and save to dictionary."""
+    try:
+        sorted_words = dictionary.sort_words(sort_by)
+        return sorted_words
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))

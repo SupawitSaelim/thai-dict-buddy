@@ -19,14 +19,39 @@ const DictionaryApp = () => {
     fetchWords();
   }, []);
 
-  const fetchWords = async () => {
+  const fetchWords = async (sortBy = null) => {
     setIsLoading(true);
     try {
-      const response = await fetch('http://localhost:8000/api/v1/words/');
+      const url = new URL('http://localhost:8000/api/v1/words/');
+      if (sortBy) {
+        url.searchParams.append('sort_by', sortBy);
+      }
+      const response = await fetch(url);
       const data = await response.json();
       setWords(data);
     } catch (error) {
       showMessage('error', 'ไม่สามารถโหลดข้อมูลได้');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleSort = async (field) => {
+    setIsLoading(true);
+    try {
+      const response = await fetch(`http://localhost:8000/api/v1/words/sort/?sort_by=${field}`, {
+        method: 'POST'
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setWords(data);
+        showMessage('success', 'เรียงลำดับข้อมูลเรียบร้อย');
+      } else {
+        const errorData = await response.json();
+        showMessage('error', errorData.detail || 'เกิดข้อผิดพลาดในการเรียงลำดับ');
+      }
+    } catch (error) {
+      showMessage('error', 'เกิดข้อผิดพลาดในการเชื่อมต่อ');
     } finally {
       setIsLoading(false);
     }
@@ -110,6 +135,7 @@ const DictionaryApp = () => {
       }
 
       const data = await response.json();
+      
       if (response.ok) {
         showMessage('success', editingWord ? 'แก้ไขคำศัพท์เรียบร้อยแล้ว' : 'เพิ่มคำศัพท์เรียบร้อยแล้ว');
         setNewWord({ english: '', thai: '', category: '' });
@@ -117,7 +143,12 @@ const DictionaryApp = () => {
         fetchWords();
         setActiveTab('list');
       } else {
-        showMessage('error', data.detail || 'เกิดข้อผิดพลาด');
+        if (response.status === 409) {
+          // Handle duplicate word error
+          showMessage('error', data.detail);
+        } else {
+          showMessage('error', data.detail || 'เกิดข้อผิดพลาด');
+        }
       }
     } catch (error) {
       showMessage('error', 'เกิดข้อผิดพลาดในการบันทึกข้อมูล');
@@ -204,6 +235,7 @@ const DictionaryApp = () => {
               words={words}
               handleEdit={handleEdit}
               handleDelete={handleDelete}
+              onSort={handleSort}
             />
           )}
         </div>
