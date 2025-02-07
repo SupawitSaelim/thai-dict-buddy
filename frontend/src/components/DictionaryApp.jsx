@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Plus, Book, Moon, Sun, AlertCircle, GraduationCap } from 'lucide-react';
+import { Search, Plus, Book, Moon, Sun, AlertCircle, GraduationCap, HelpCircle } from 'lucide-react';
 import SearchTab from './SearchTab';
 import AddEditTab from './AddEditTab';
 import ListTab from './ListTab';
 import PracticeTab from './PracticeTab';
+import QuizTab from './QuizTab';
+
 
 const DictionaryApp = () => {
   const [words, setWords] = useState([]);
@@ -177,7 +179,8 @@ const DictionaryApp = () => {
             { id: 'search', label: 'ค้นหาคำศัพท์', icon: Search },
             { id: 'add', label: editingWord ? 'แก้ไขคำศัพท์' : 'เพิ่มคำศัพท์', icon: Plus },
             { id: 'list', label: 'รายการคำศัพท์', icon: Book },
-            { id: 'practice', label: 'ฝึกคำศัพท์', icon: GraduationCap }
+            { id: 'practice', label: 'ฝึกคำศัพท์', icon: GraduationCap },
+            { id: 'quiz', label: 'แบบทดสอบ', icon: HelpCircle }
           ].map(({ id, label, icon: Icon }) => (
             <button
               key={id}
@@ -241,6 +244,13 @@ const DictionaryApp = () => {
 
           {activeTab === 'practice' && (
             <PracticeTab
+              darkMode={darkMode}
+              words={words}
+            />
+          )}
+
+          {activeTab === 'quiz' && (
+            <QuizTab
               darkMode={darkMode}
               words={words}
             />
