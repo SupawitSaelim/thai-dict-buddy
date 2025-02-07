@@ -225,6 +225,8 @@ const DictionaryApp = () => {
               setNewWord={setNewWord}
               editingWord={editingWord}
               setEditingWord={setEditingWord}
+              showMessage={showMessage}  // เพิ่มใหม่
+              fetchWords={fetchWords} 
             />
           )}
 

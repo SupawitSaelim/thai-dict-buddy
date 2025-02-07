@@ -1,9 +1,13 @@
 from fastapi import APIRouter, HTTPException, Depends, Query
+from pydantic import BaseModel
 from typing import List, Dict
 from models.word import Word
 from services.dictionary import DictionaryService
 
 router = APIRouter()
+
+class WordImport(BaseModel):
+    words: List[Word]
 
 # Dependency
 def get_dictionary_service():
@@ -24,6 +28,30 @@ async def add_word(word: Word, dictionary: DictionaryService = Depends(get_dicti
 async def get_all_words(dictionary: DictionaryService = Depends(get_dictionary_service)):
     """Get all words from the dictionary."""
     return dictionary.get_all_words()
+
+@router.post("/words/bulk", response_model=Dict[str, str])
+async def import_words(
+    data: WordImport,
+    dictionary: DictionaryService = Depends(get_dictionary_service)
+):
+    """Import multiple words at once."""
+    try:
+        added = 0
+        skipped = 0
+        
+        for word in data.words:
+            try:
+                dictionary.add_word(word)
+                added += 1
+            except ValueError:
+                skipped += 1
+                continue
+        
+        return {
+            "message": f"นำเข้าข้อมูลสำเร็จ {added} คำ (ข้ามไป {skipped} คำที่มีอยู่แล้ว)"
+        }
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
 
 @router.get("/words/search", response_model=List[Word])
 async def search_words(
