@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, HTTPException, Depends, Query
 from typing import List, Dict
 from models.word import Word
 from services.dictionary import DictionaryService
@@ -24,6 +24,19 @@ async def add_word(word: Word, dictionary: DictionaryService = Depends(get_dicti
 async def get_all_words(dictionary: DictionaryService = Depends(get_dictionary_service)):
     """Get all words from the dictionary."""
     return dictionary.get_all_words()
+
+@router.get("/words/search", response_model=List[Word])
+async def search_words(
+    term: str = Query(..., description="Search term for filtering words"),
+    dictionary: DictionaryService = Depends(get_dictionary_service)
+):
+    """
+    Search words by term. Matches partial words in english, thai, and category fields.
+    """
+    try:
+        return dictionary.search_words(term)
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
 
 @router.get("/words/{english_word}", response_model=Word)
 async def get_word(english_word: str, dictionary: DictionaryService = Depends(get_dictionary_service)):
@@ -86,3 +99,4 @@ async def delete_all_words(dictionary: DictionaryService = Depends(get_dictionar
         return {"message": "ลบคำศัพท์ทั้งหมดเรียบร้อยแล้ว"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+

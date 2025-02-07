@@ -231,4 +231,34 @@ class DictionaryService:
     def delete_all_words(self):
         """Delete all words from the dictionary."""
         self.words.clear()
-        self._save_dictionary()  
+        self._save_dictionary()
+
+    def search_words(self, term: str) -> List[Word]:
+        """
+        Search words by term, matching partial words in english, thai, and category fields.
+        
+        Args:
+            term: Search term to filter words by
+            
+        Returns:
+            List of matching Word objects
+        """
+        # Normalize search term
+        search_term = self._normalize_key(term)
+        
+        # Filter words that match the search term in any field
+        matching_words = []
+        for eng, data in self.words.items():
+            # Check if search term appears in any field
+            if (search_term in eng or  # Match in English
+                search_term in self._normalize_key(data["thai"]) or  # Match in Thai
+                (data.get("category") and  # Match in category if it exists
+                search_term in self._normalize_key(data["category"]))):
+                
+                matching_words.append(Word(
+                    english=eng,
+                    thai=data["thai"],
+                    category=data.get("category")
+                ))
+        
+        return matching_words  

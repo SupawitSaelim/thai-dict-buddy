@@ -62,28 +62,25 @@ const DictionaryApp = () => {
     setTimeout(() => setMessage(null), 3000);
   };
 
-  const handleSearch = async () => {
-    setIsLoading(true);
+  const handleSearch = async (searchValue = searchTerm) => {
     try {
-      if (!searchTerm.trim()) {
+      if (!searchValue.trim()) {
         fetchWords();
         return;
       }
       
-      const response = await fetch(`http://localhost:8000/api/v1/words/${searchTerm}`);
+      const response = await fetch(`http://localhost:8000/api/v1/words/search?term=${encodeURIComponent(searchValue)}`);
       if (response.ok) {
         const data = await response.json();
-        setWords([data]);
+        setWords(data);
       } else {
-        showMessage('error', 'ไม่พบคำศัพท์ที่ค้นหา');
         setWords([]);
       }
     } catch (error) {
-      showMessage('error', 'เกิดข้อผิดพลาดในการค้นหา');
-    } finally {
-      setIsLoading(false);
+      console.error('Search error:', error);
+      setWords([]);
     }
-  };
+  }
 
   const handleDelete = async (english) => {
     try {

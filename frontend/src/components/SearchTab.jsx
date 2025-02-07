@@ -20,8 +20,10 @@ const SearchTab = ({
           } border focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all`}
           placeholder="พิมพ์คำศัพท์ที่ต้องการค้นหา..."
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+            handleSearch(e.target.value);
+          }}
         />
         <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
       </div>

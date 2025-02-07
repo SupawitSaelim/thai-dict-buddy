@@ -1,1 +1,10 @@
-{}
+{
+    "bandwidth": {
+        "thai": "แบนด์วิดท์",
+        "category": null
+    },
+    "configuration": {
+        "thai": "การตั้งค่า",
+        "category": null
+    }
+}
