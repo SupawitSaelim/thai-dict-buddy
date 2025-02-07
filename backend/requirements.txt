@@ -1,0 +1,12 @@
+fastapi==0.110.0
+uvicorn==0.27.1
+python-dotenv==1.0.1
+sqlalchemy==2.0.27
+pydantic==2.6.1
+alembic==1.13.1
+requests==2.31.0
+pytest==8.0.0
+httpx==0.26.0  # For testing FastAPI applications
+python-jose==3.3.0  # For JWT tokens
+passlib==1.7.4  # For password hashing
+bcrypt==4.1.2  # For password hashing
