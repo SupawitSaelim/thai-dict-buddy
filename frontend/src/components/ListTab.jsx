@@ -45,7 +45,7 @@ const ListTab = ({
               className={`px-4 py-2 rounded-lg flex items-center gap-2 ${
                 darkMode 
                   ? 'bg-gray-700 hover:bg-gray-600' 
-                  : 'bg-gray-100 hover:bg-gray-200'
+                  : 'bg-gray-100 hover:bg-gray-200 text-gray-900'
               } transition-colors`}
             >
               <ArrowUpDown className="w-4 h-4" />
@@ -72,7 +72,9 @@ const ListTab = ({
               <AlertTriangle className="w-6 h-6" />
               <h3 className="text-xl font-medium">ยืนยันการลบ</h3>
             </div>
-            <p className="mb-6">คุณแน่ใจหรือไม่ที่จะลบคำศัพท์ทั้งหมด {words.length} คำ? การกระทำนี้ไม่สามารถย้อนกลับได้</p>
+            <p className={`mb-6 ${
+                darkMode ? 'text-white' : 'text-gray-900'
+              }`}>คุณแน่ใจหรือไม่ที่จะลบคำศัพท์ทั้งหมด {words.length} คำ? การกระทำนี้ไม่สามารถย้อนกลับได้</p>
             <div className="flex justify-end gap-4">
               <button
                 onClick={() => setShowConfirmDialog(false)}
@@ -100,10 +102,18 @@ const ListTab = ({
         <table className="w-full">
           <thead className={darkMode ? 'bg-gray-700' : 'bg-gray-50'}>
             <tr>
-              <th className="px-6 py-4 text-center">คำศัพท์</th>
-              <th className="px-6 py-4 text-center">คำแปล</th>
-              <th className="px-6 py-4 text-center">หมวดหมู่</th>
-              <th className="px-6 py-4 text-right"></th>
+              <th className={`px-6 py-4 text-center ${
+                darkMode ? 'text-white' : 'text-gray-900'
+              }`}>คำศัพท์</th>
+              <th className={`px-6 py-4 text-center ${
+                darkMode ? 'text-white' : 'text-gray-900'
+              }`}>คำแปล</th>
+              <th className={`px-6 py-4 text-center ${
+                darkMode ? 'text-white' : 'text-gray-900'
+              }`}>หมวดหมู่</th>
+              <th className={`px-6 py-4 text-center ${
+                darkMode ? 'text-white' : 'text-gray-900'
+              }`}></th>
             </tr>
           </thead>
           <tbody>
@@ -116,9 +126,15 @@ const ListTab = ({
                     : 'hover:bg-gray-50'
                 }`}
               >
-                <td className="px-6 py-4">{word.english}</td>
-                <td className="px-6 py-4">{word.thai}</td>
-                <td className="px-6 py-4">{word.category || '-'}</td>
+                <td className={`px-6 py-4 ${
+                  darkMode ? 'text-white' : 'text-gray-900'
+                }`}>{word.english}</td>
+                <td className={`px-6 py-4 ${
+                  darkMode ? 'text-white' : 'text-gray-900'
+                }`}>{word.thai}</td>
+                <td className={`px-6 py-4 ${
+                  darkMode ? 'text-white' : 'text-gray-900'
+                }`}>{word.category || '-'}</td>
                 <td className="px-6 py-4 text-right space-x-4">
                   <button
                     onClick={() => handleEdit(word)}

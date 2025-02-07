@@ -16,7 +16,7 @@ const SearchTab = ({
           className={`w-full pl-12 pr-4 py-4 rounded-lg text-lg ${
             darkMode 
               ? 'bg-gray-700 focus:bg-gray-600 border-gray-600' 
-              : 'bg-gray-50 focus:bg-white border-gray-200'
+              : 'bg-gray-50 focus:bg-white border-gray-200 text-gray-900'
           } border focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all`}
           placeholder="พิมพ์คำศัพท์ที่ต้องการค้นหา..."
           value={searchTerm}
@@ -39,7 +39,9 @@ const SearchTab = ({
             >
               <div className="flex justify-between items-start">
                 <div>
-                  <h3 className="text-xl font-medium mb-2">{word.english}</h3>
+                    <h3 className={`text-xl font-medium mb-2 ${
+                      darkMode ? 'text-white' : 'text-gray-900'
+                    }`}>{word.english}</h3>
                   <p className={`text-lg ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
                     {word.thai}
                   </p>

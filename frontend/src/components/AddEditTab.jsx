@@ -17,7 +17,7 @@ const AddEditTab = ({
           className={`w-full px-4 py-3 rounded-lg ${
             darkMode 
               ? 'bg-gray-700 border-gray-600' 
-              : 'bg-gray-50 border-gray-200'
+              : 'bg-gray-50 border-gray-200 text-gray-900'
           } border focus:outline-none focus:ring-2 focus:ring-blue-500`}
           placeholder="คำศัพท์ภาษาอังกฤษ"
           value={newWord.english}
@@ -30,7 +30,7 @@ const AddEditTab = ({
           className={`w-full px-4 py-3 rounded-lg ${
             darkMode 
               ? 'bg-gray-700 border-gray-600' 
-              : 'bg-gray-50 border-gray-200'
+              : 'bg-gray-50 border-gray-200 text-gray-900'
           } border focus:outline-none focus:ring-2 focus:ring-blue-500`}
           placeholder="คำแปลภาษาไทย"
           value={newWord.thai}
@@ -42,7 +42,7 @@ const AddEditTab = ({
           className={`w-full px-4 py-3 rounded-lg ${
             darkMode 
               ? 'bg-gray-700 border-gray-600' 
-              : 'bg-gray-50 border-gray-200'
+              : 'bg-gray-50 border-gray-200 text-gray-900'
           } border focus:outline-none focus:ring-2 focus:ring-blue-500`}
           placeholder="หมวดหมู่ (ไม่บังคับ)"
           value={newWord.category}

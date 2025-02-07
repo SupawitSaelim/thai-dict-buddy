@@ -163,9 +163,8 @@ const DictionaryApp = () => {
       <div className="container mx-auto px-4 py-6">
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold flex items-center gap-3">
-            <Book className="w-8 h-8" />
-            <span>พจนานุกรม อังกฤษ-ไทย</span>
+          <h1 className={`text-3xl font-bold flex items-center gap-3 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+            <span>Thai Dict Buddy 📚</span>
           </h1>
           <button
             onClick={() => setDarkMode(!darkMode)}
@@ -195,7 +194,7 @@ const DictionaryApp = () => {
               className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all ${
                 activeTab === id
                   ? 'bg-blue-500 text-white shadow-lg scale-105'
-                  : `${darkMode ? 'hover:bg-gray-800' : 'hover:bg-white hover:shadow'}`
+                  : `${darkMode ? 'hover:bg-gray-800' : 'hover:bg-white hover:shadow hover:text-gray-900'}`
               }`}
             >
               <Icon className="w-5 h-5" />
