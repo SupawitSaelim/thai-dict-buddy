@@ -6,9 +6,7 @@ import ListTab from './ListTab';
 import PracticeTab from './PracticeTab';
 import QuizTab from './QuizTab';
 
-const API_BASE_URL = import.meta.env.PROD 
-  ? 'http://localhost:8000/api/v1'  // Production URL
-  : 'http://localhost:8000/api/v1';
+const API_BASE_URL = `http://${window.location.hostname}:8000/api/v1`;
 
 const DictionaryApp = () => {
   const [words, setWords] = useState([]);
