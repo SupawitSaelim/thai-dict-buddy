@@ -63,7 +63,4 @@ If you need additional features or encounter any issues, please email us at [sup
 - Added word management features (edit/delete)
 
 ---
-🚧 **This project is under development** 🚧  
-Stay tuned for updates and new features!
-
-Note: Please replace "main_screen" and "quiz_screen" with actual image links.
+🚧 🚧  
