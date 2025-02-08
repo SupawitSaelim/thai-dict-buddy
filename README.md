@@ -1,40 +1,42 @@
-# Thai Dict Buddy 📚
+# Thai Dict Buddy 📚 v1.0
 
-A modern English-Thai dictionary web application with an intuitive UI. Features include word search, add/edit/delete functionality, category tagging, and dark mode support.
+A modern English-Thai dictionary application with an intuitive user interface.
 
-> ⚠️ **Note**: This project is currently under development and being worked on during spare time. Features and documentation will be gradually improved.
+## ✨ Main Features
 
-## Features
+![Main Screen](main_screen)
+*Main application interface showing search functionality and word list*
 
-Current implementation:
-- 🔍 Word search functionality
-- ➕ Add new words with Thai translations
-- 📝 Edit existing entries
-- 🗑️ Delete words
-- 🏷️ Category tagging system
-- 🌓 Dark mode support
-- 💅 Clean and responsive UI
+- 🔍 **Search**: Quick search for English words and their Thai meanings
+- ➕ **Add Words**: Add new words with Thai translations 
+- 📝 **Word List**: View all words in the system
+- 📖 **Practice**: Test your knowledge with random word quizzes
 
-## Tech Stack
+![Quiz Function](quiz_screen)
+*Quiz feature that helps users practice vocabulary in the system*
 
-- Frontend: React + Tailwind CSS
-- Backend: FastAPI
-- Icons: Lucide React
+- ✍️ **Translation Practice**: Practice translating words from English to Thai
+- 🔄 **Language Switch**: Option to switch between English to Thai and Thai to English
+- 🎯 **Scoring**: Shows score and remaining questions
 
-## Getting Started
+## 📥 Download
 
-Instructions for setup and installation will be added soon.
+| Operating System | Version | Link |
+|-----------------|---------|------|
+| Windows | 64-bit | [Download](https://drive.google.com/file/d/19bfWbmU9thWqZhPKkBHHO3BluqM1jleM/view?usp=sharing) |
 
-## Contributing
+## 📝 Feedback and Development
 
-As this is a personal project being developed in spare time, I'm not actively seeking contributions at the moment. However, feel free to open issues for bugs or feature suggestions.
+If you need additional features or encounter any issues, please email us at [your-email]
 
-## License
+## 🔄 Latest Updates
 
-Project license information will be added soon.
+- Added vocabulary quiz system
+- Improved UI/UX for better usability
+- Added language switch feature in quiz mode
 
 ---
+🚧 **This project is under development** 🚧  
+Stay tuned for updates and new features!
 
-🚧 **Work in Progress** 🚧
-
-This is a side project that I work on during my free time. Updates may be irregular, but I'm committed to improving it gradually. Stay tuned for more features and improvements!
+Note: Please replace "main_screen" and "quiz_screen" with actual image links, and add your email in the "[your-email]" section.

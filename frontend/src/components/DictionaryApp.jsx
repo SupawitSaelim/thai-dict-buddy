@@ -6,6 +6,9 @@ import ListTab from './ListTab';
 import PracticeTab from './PracticeTab';
 import QuizTab from './QuizTab';
 
+const API_BASE_URL = import.meta.env.PROD 
+  ? 'http://localhost:8000/api/v1'  // Production URL
+  : 'http://localhost:8000/api/v1';
 
 const DictionaryApp = () => {
   const [words, setWords] = useState([]);
@@ -24,7 +27,7 @@ const DictionaryApp = () => {
   const fetchWords = async (sortBy = null) => {
     setIsLoading(true);
     try {
-      const url = new URL('http://localhost:8000/api/v1/words/');
+      const url = new URL(`${API_BASE_URL}/words/`);
       if (sortBy) {
         url.searchParams.append('sort_by', sortBy);
       }
@@ -41,7 +44,7 @@ const DictionaryApp = () => {
   const handleSort = async (field) => {
     setIsLoading(true);
     try {
-      const response = await fetch(`http://localhost:8000/api/v1/words/sort/?sort_by=${field}`, {
+      const response = await fetch(`${API_BASE_URL}/words/sort/?sort_by=${field}`, {
         method: 'POST'
       });
       if (response.ok) {
@@ -70,8 +73,8 @@ const DictionaryApp = () => {
         fetchWords();
         return;
       }
-      
-      const response = await fetch(`http://localhost:8000/api/v1/words/search?term=${encodeURIComponent(searchValue)}`);
+
+      const response = await fetch(`${API_BASE_URL}/words/search?term=${encodeURIComponent(searchValue)}`);
       if (response.ok) {
         const data = await response.json();
         setWords(data);
@@ -86,7 +89,7 @@ const DictionaryApp = () => {
 
   const handleDelete = async (english) => {
     try {
-      const response = await fetch(`http://localhost:8000/api/v1/words/${english}`, {
+      const response = await fetch(`${API_BASE_URL}/words/${english}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'
@@ -120,13 +123,13 @@ const DictionaryApp = () => {
     try {
       let response;
       if (editingWord) {
-        response = await fetch(`http://localhost:8000/api/v1/words/${editingWord.english}`, {
+        response = await fetch(`${API_BASE_URL}/words/${editingWord.english}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(newWord),
         });
       } else {
-        response = await fetch('http://localhost:8000/api/v1/words/', {
+        response = await fetch(`${API_BASE_URL}/words/`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(newWord),
@@ -213,7 +216,7 @@ const DictionaryApp = () => {
               className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all ${
                 activeTab === id
                   ? 'bg-blue-500 text-white shadow-lg scale-105'
-                  : `${darkMode ? 'hover:bg-gray-800' : 'hover:bg-white hover:shadow hover:text-gray-900'}`
+                  : `${darkMode ? 'text-gray-300 hover:bg-gray-800' : 'hover:bg-white hover:shadow hover:text-gray-900'}`
               }`}
             >
               <Icon className="w-5 h-5" />
