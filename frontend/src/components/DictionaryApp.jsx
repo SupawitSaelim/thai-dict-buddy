@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Plus, Book, Moon, Sun, AlertCircle, GraduationCap, HelpCircle } from 'lucide-react';
+import { Search, Plus, Book, Moon, Sun, AlertCircle, GraduationCap, HelpCircle, Info, Bookmark } from 'lucide-react';
 import SearchTab from './SearchTab';
 import AddEditTab from './AddEditTab';
 import ListTab from './ListTab';
@@ -164,13 +164,32 @@ const DictionaryApp = () => {
         <div className="flex justify-between items-center mb-8">
           <h1 className={`text-3xl font-bold flex items-center gap-3 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
             <span>Thai Dict Buddy 📚</span>
+            <p>v1.0</p>
           </h1>
-          <button
-            onClick={() => setDarkMode(!darkMode)}
-            className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-          >
-            {darkMode ? <Sun className="w-6 h-6" /> : <Moon className="w-6 h-6" />}
-          </button>
+          <div className="flex items-center gap-2">
+            <a
+              href="https://github.com/SupawitSaelim"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`p-2 rounded-full transition-colors ${
+                darkMode 
+                  ? 'hover:bg-gray-700 text-white' 
+                  : 'hover:bg-gray-200 text-gray-700'
+              }`}
+            >
+              <Info className="w-6 h-6" />
+            </a>
+            <button
+              onClick={() => setDarkMode(!darkMode)}
+              className={`p-2 rounded-full transition-colors ${
+                darkMode 
+                  ? 'hover:bg-gray-700 text-white' 
+                  : 'hover:bg-gray-200 text-gray-700'
+              }`}
+            >
+              {darkMode ? <Sun className="w-6 h-6" /> : <Moon className="w-6 h-6" />}
+            </button>
+          </div>
         </div>
 
         {/* Navigation Tabs */}
